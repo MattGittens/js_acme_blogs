@@ -16,10 +16,9 @@ return htmlElem;
 function createSelectOptions(JSONData){
 if(JSONData){
 const obj = JSON.parse(JSONData);
-obj.forEach(element => document.createElement(Option(element.user.name,element.user.id)));
+const arr = obj.forEach(element => document.createElement(Option(element.user.name,element.user.id)));
 }
- return;
-
+return arr;
 }
 
 //function 3
