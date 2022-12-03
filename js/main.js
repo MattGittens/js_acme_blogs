@@ -6,6 +6,7 @@ const htmlElem = document.createElement(elem);
 htmlElem.textContent = textCont;
 if(className) htmlElem.classList.add(className);
 return htmlElem;
+}
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
