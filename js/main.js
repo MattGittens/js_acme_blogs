@@ -38,7 +38,7 @@ function toggleCommentSection(postId) {
             commentSection.classList.toggle('hide');
             return commentSection;
             }
-            
+            else
             return null;
            
         }
