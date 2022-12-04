@@ -47,25 +47,37 @@ function toggleCommentSection(postId) {
 }
         
 //function 4
+//toggles comment button
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 function toggleCommentButton (postID) {
-
-    // if postID is not received, return
     if (!postID) {
       return;
     }
-  
-    // select button having its value of "data-post-id" attribute = value of "postId"
+ 
     const btnSelectedEl = document.querySelector(`button[data-post-id = "${postID}"`);
   
     if (btnSelectedEl != null) {
-      // if the textContent of button is 'Show Comments', change it to "Hide Comments", otherwise change to "Show Comments" by making use of ternary operator
-      btnSelectedEl.textContent === "Show Comments" ? (btnSelectedEl.textContent = "Hide Comments") : (btnSelectedEl.textContent = "Show Comments");
+        btnSelectedEl.textContent === "Show Comments" ? (btnSelectedEl.textContent = "Hide Comments") : (btnSelectedEl.textContent = "Show Comments");
     }
   
-    // returning the selected button element
+   
     return btnSelectedEl;
   };
+  //completed
   
-  
-  // check for function
-  console.log(toggleCommentButton("btnToTest"));
+ 
+
+  //function 5
+  function deleteChildElements(parentElement) {
+    if(typeof(parentElement) === undefined){
+    return undefined;
+    }
+    else{
+    let child = parentElement.lastElementChild;
+    while (child) {
+      parentElement.removeChild(child);
+      child = parentElement.lastElementChild;
+    }
+    return parentElement;
+  }
+}
