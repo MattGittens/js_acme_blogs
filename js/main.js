@@ -31,17 +31,16 @@ function toggleCommentSection(postId) {
         //selects all posts
 
 
-        for (let i = 0; i < commentSections.length; i++) {
+        for (let i = 0; i < comments.length; i++) {
             const commentSection = comments[i];
             // If Post Id Attribut Of Comment Section Is Equal To Post Id Passed Arg
-            if (commentSection.getAttribute('data-post-id') !== postId) {
-            return null;
-               
-            }
-            else {
+            if (commentSection.getAttribute('data-post-id') === postId) {
             commentSection.classList.toggle('hide');
             return commentSection;
             }
+            
+            return null;
+           
         }
 
         
