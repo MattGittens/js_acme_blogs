@@ -20,8 +20,31 @@ function createSelectOptions(jsonData){
 }
 
 //function 3
-function toggleCommentSection (postID){
-const elem = document.getElementByID(postID);
-const section = elem.getElementByTagName('section')
-return section;
+function toggleCommentSection(postId) {
+    if (!postId) {
+        return undefined;
+        //returns undefined if no post id
+
+
+    } else {
+        const comments = document.querySelectorAll('[data-post-id]');
+        //selects all posts
+
+
+        for (let i = 0; i < commentSections.length; i++) {
+            const commentSection = comments[i];
+            // If Post Id Attribut Of Comment Section Is Equal To Post Id Passed Arg
+            if (commentSection.getAttribute('data-post-id') !== postId) {
+            return null;
+               
+            }
+            else {
+            commentSection.classList.toggle('hide');
+            return commentSection;
+            }
+        }
+
+        
+        
+    }   
 }
