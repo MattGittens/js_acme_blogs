@@ -13,15 +13,15 @@ return htmlElem;
 
 //function 2
 //creates select options for JSON data
-function createSelectOptions(JSONData){
-if(JSONData){
-const obj = JSON.parse(JSONData);
-const arr = obj.forEach(element => document.createElement(Option(element.user.name,element.user.id)));
-}
-return arr;
+function createSelectOptions(jsonData){
+    const obj = JSON.parse(jsonData)
+
+
 }
 
 //function 3
-function toggleCommentSection (){
-
+function toggleCommentSection (postID){
+const elem = document.getElementByID(postID);
+const section = elem.getElementByTagName('section')
+return section;
 }
