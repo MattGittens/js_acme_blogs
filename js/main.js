@@ -14,9 +14,13 @@ return htmlElem;
 //function 2
 //creates select options for JSON data
 function createSelectOptions(jsonData){
-    const obj = JSON.parse(jsonData)
+  if(!jsonData){
+    return undefined;
+  }else{
+    const obj = JSON.parse(jsonData);
 
 
+}
 }
 
 //function 3
@@ -69,8 +73,10 @@ function toggleCommentButton (postID) {
 
   //function 5
   function deleteChildElements(parentElement) {
-    if(typeof(parentElement) === undefined){
-    return undefined;
+    if(parentElement==undefined || parentElement=='')
+        {
+            // return normal html
+            return undefined;
     }
     else{
     let child = parentElement.lastElementChild;
@@ -118,4 +124,37 @@ const removeButtonListeners = () => {
       }
       return buttonsList
   }
+}
+
+
+//function 8
+function createComments(comments) {
+  //The function createComments should return undefined if it does not receive a parameter.
+  if (!comments) {
+    return undefined;
+  }
+  // b. Receives JSON comments data as a parameter
+  // c. Creates a fragment element with document.createDocumentFragment()
+  let frag = document.createDocumentFragment();
+  // d.Loop through the comments
+  for (let i = 0; i < comments.length; i++) {
+    const element = comments[i];
+    // e. For each comment do the following:
+    // f. Create an article element with document.createElement()
+    let a = document.createElement("a");
+    // g. Create an h3 element with createElemWithText('h3', comment.name)
+    let h3 = createElemWithText("h3", comment.name);
+    // h. Create an paragraph element with createElemWithText('p', comment.body)
+    let p1 = createElemWithText("p", comment.body);
+    // i. Create an paragraph element with createElemWithText('p', `From: ${comment.email}`)
+    let p2 = createElemWithText("p", `From: ${comment.email}`);
+    // j. Append the h3 and paragraphs to the article element (see cheatsheet)
+    a.appendChild(h3);
+    a.appendChild(p);
+    a.appendChild(p);
+    // k. Append the article element to the fragment
+    frag.appendChild(a);
+  }
+  // l. Return the fragment element
+  return frag;
 }
