@@ -81,3 +81,41 @@ function toggleCommentButton (postID) {
     return parentElement;
   }
 }
+
+
+
+//function 6
+const addButtonListeners = () => {
+  let myMainElem = document.querySelector('main')
+  let buttonsList = myMainElem.querySelectorAll('button')
+  if(buttonsList){
+      for(let i = 0; i < buttonsList.length; i++){
+          let myButton = buttonsList[i]
+          let postId = myButton.dataset.postId
+          myButton.addEventListener('click', function(event){
+              toggleComments(event, postId), false
+          })
+      }
+      return buttonsList
+  }
+
+}
+
+
+
+//function 7
+const removeButtonListeners = () => {
+  let myMainElem = document.querySelector('main')
+  let buttonsList = myMainElem.querySelectorAll('button')
+  console.log(buttonsList)
+  if(buttonsList){
+      for(let i = 0; i < buttonsList.length; i++){
+          let myButton = buttonsList[i]
+          postId = myButton.dataset.postId
+          myButton.removeEventListener('click', function(event){ 
+          toggleComments(event, postId), false
+      })
+      }
+      return buttonsList
+  }
+}
