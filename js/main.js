@@ -31,16 +31,17 @@ function toggleCommentSection(postId) {
         return undefined;
     } else {
         // Else, Get All Comment Sections
-        const commentSections = document.querySelectorAll('[data-post-id]');
+        const commentSections = document.querySelectorAll('data-post-id');
         // Loop Through Each Comment Section
         for (let i = 0; i < commentSections.length; i++) {
             const commentSection = commentSections[i];
             // If Post Id Attribut Of Comment Section Is Equal To Post Id Passed Arg
-            if (commentSection.getAttribute('data-post-id') === postId) {
+            if (commentSection.getAttribute('[data-post-id]') === postId) {
                 // Toggle Hide Class
                 commentSection.classList.toggle('hide');
                 // Return Comment Section Element
                 return commentSection;
+                console.log(commentSection)
             }
         }
 
@@ -73,24 +74,23 @@ function toggleCommentButton (postID) {
 
   //function 5
   function deleteChildElements(parentElement) {
-    if(parentElement==undefined || parentElement=='')
-        {
-            // return normal html
-            return undefined;
+    if (!parentElement || !parentElement.nodeType) {
+      return undefined;
     }
     else{
     let child = parentElement.lastElementChild;
     while (child) {
-      parentElement.removeChild(child);
+      parentElement.removeChild(child); 
       child = parentElement.lastElementChild;
     }
     return parentElement;
   }
 }
-
+//completed
 
 
 //function 6
+/*
 const addButtonListeners = () => {
   let myMainElem = document.querySelector('main')
   let buttonsList = myMainElem.querySelectorAll('button')
@@ -99,15 +99,43 @@ const addButtonListeners = () => {
           let myButton = buttonsList[i]
           let postId = myButton.dataset.postId
           myButton.addEventListener('click', function(event){
-              toggleComments(event, postId), false
+              toggleComments(postId), false
           })
       }
       return buttonsList
   }
 
 }
+*/
+const addButtonListeners = function() {
+
+  const buttons = document.querySelectorAll("main")[0].querySelectorAll('button');     // selectes all buttons in main
+
+  // button should be exists
+  if (buttons.length > 0) {
+
+      // For each button element
+
+      buttons.forEach( (button) => {
+
+          const postID = button.dataset.postId;   // get the postID according to the question
+
+          // Now add event listener to this button
+
+          button.addEventListener("click", function() {
+
+              toggleComments(postID);      // calling toggleComments method with postID as parameter
+
+          })
+
+      })
+
+  }
+
+  return buttons;   // returning the nodeList of buttons
 
 
+}
 
 //function 7
 const removeButtonListeners = () => {
@@ -125,6 +153,8 @@ const removeButtonListeners = () => {
       return buttonsList
   }
 }
+//completed
+
 
 
 //function 8
