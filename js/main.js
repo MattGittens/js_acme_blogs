@@ -90,7 +90,6 @@ function toggleCommentButton (postID) {
 
 
 //function 6
-/*
 const addButtonListeners = () => {
   let myMainElem = document.querySelector('main')
   let buttonsList = myMainElem.querySelectorAll('button')
@@ -106,36 +105,8 @@ const addButtonListeners = () => {
   }
 
 }
-*/
-const addButtonListeners = function() {
-
-  const buttons = document.querySelectorAll("main")[0].querySelectorAll('button');     // selectes all buttons in main
-
-  // button should be exists
-  if (buttons.length > 0) {
-
-      // For each button element
-
-      buttons.forEach( (button) => {
-
-          const postID = button.dataset.postId;   // get the postID according to the question
-
-          // Now add event listener to this button
-
-          button.addEventListener("click", function() {
-
-              toggleComments(postID);      // calling toggleComments method with postID as parameter
-
-          })
-
-      })
-
-  }
-
-  return buttons;   // returning the nodeList of buttons
 
 
-}
 
 //function 7
 const removeButtonListeners = () => {
@@ -187,4 +158,111 @@ function createComments(comments) {
   }
   // l. Return the fragment element
   return frag;
+}
+
+
+//function 9
+function populateSelectMenu(users) {
+
+  // if users is empty, return undefined
+  if (!users) return;
+  // select the selectMenu id
+  let menu = document.querySelector("#selectMenu");
+  // passes the data to createSelectOptions to get an array
+  let options = createSelectOptions(users);
+
+  // loop through and append each option to the menu
+  for (let i = 0; i < options.length; i++) {
+      let option = options[i];
+      menu.append(option);
+  } // end for loop
+
+  // return menu
+  return menu;
+
+} // end populateSelectMenu
+
+
+
+
+//function 10
+const getUsers = async() => {
+
+  let retrieve;
+  // fetch users from jsonplaceholder.typicode.com
+  try {
+      retrieve = await fetch("https://jsonplaceholder.typicode.com/users");
+  } // end try
+  catch (error) {
+      console.log(error);
+  } // end catch
+
+  // return information
+  return await retrieve.json();
+
+} 
+//completed
+
+
+
+//function 11
+const getUserPosts = async(userId) => {
+
+  // if userId has nothing
+  if (!userId) return;
+
+  let retrieve;
+
+  // try to fetch data for userId
+  try {
+      retrieve = await fetch(`https://jsonplaceholder.typicode.com/users/${userId}/posts`);
+  } // end try
+  catch (error) {
+      console.log(error);
+  } // end catch
+
+  // return information
+  return retrieve.json();
+
+} 
+//completed
+
+
+
+//function 12
+const getUser = async(userId) => {
+
+  // if userId has nothing
+  if (!userId) return;
+
+  let retrieve;
+
+  // try to fetch data for userId
+  try {
+      retrieve = await fetch(`https://jsonplaceholder.typicode.com/users/${userId}`);
+  } // end try
+  catch (error) {
+      console.log(error);
+  } // end catch
+
+  // return information
+  return retrieve.json();
+
+} 
+//complete
+
+
+
+//function 13
+const getPostComments = async(postID) =>{
+if(!postID)
+return;
+let retrieve;
+try{
+  retrieve = await fetch(`https://jsonplaceholder.typicode.com/comments/${postId}`)
+}
+catch(error){
+  console.log(error)
+}
+return retrieve.json();
 }
