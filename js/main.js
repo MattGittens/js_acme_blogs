@@ -255,14 +255,13 @@ const getUser = async(userId) => {
 
 //function 13
 const getPostComments = async(postID) =>{
-if(!postID)
-return;
+if(!postID) return;
 let retrieve;
 try{
-  retrieve = await fetch(`https://jsonplaceholder.typicode.com/comments/${postId}`)
+  retrieve = await fetch(`https://jsonplaceholder.typicode.com/posts/${postId}/comments`);
 }
 catch(error){
-  console.log(error)
+  console.log(error);
 }
 return retrieve.json();
 }
