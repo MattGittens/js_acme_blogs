@@ -144,15 +144,15 @@ function createComments(comments) {
     // f. Create an article element with document.createElement()
     let a = document.createElement("a");
     // g. Create an h3 element with createElemWithText('h3', comment.name)
-    let h3 = createElemWithText("h3", comment.name);
+    let h3 = createElemWithText("h3", comments.name);
     // h. Create an paragraph element with createElemWithText('p', comment.body)
-    let p1 = createElemWithText("p", comment.body);
+    let p1 = createElemWithText("p", comments.body);
     // i. Create an paragraph element with createElemWithText('p', `From: ${comment.email}`)
-    let p2 = createElemWithText("p", `From: ${comment.email}`);
+    let p2 = createElemWithText("p", `From: ${comments.email}`);
     // j. Append the h3 and paragraphs to the article element (see cheatsheet)
     a.appendChild(h3);
-    a.appendChild(p);
-    a.appendChild(p);
+    a.appendChild(p1);
+    a.appendChild(p2);
     // k. Append the article element to the fragment
     frag.appendChild(a);
   }
@@ -249,7 +249,7 @@ const getUser = async(userId) => {
   return retrieve.json();
 
 } 
-//complete
+//completed
 
 
 
@@ -258,10 +258,135 @@ const getPostComments = async(postID) =>{
 if(!postID) return;
 let retrieve;
 try{
-  retrieve = await fetch(`https://jsonplaceholder.typicode.com/posts/${postId}/comments`);
+  retrieve = await fetch(`https://jsonplaceholder.typicode.com/posts/${postID}/comments`);
 }
 catch(error){
   console.log(error);
 }
 return retrieve.json();
 }
+//completed
+
+
+
+//function 14
+const displayComments =async(postId)=> {
+
+  if (!postId) {
+      return undefined;
+  }
+
+  let section = document.createElement("section");
+
+  section.dataset.postId = postId;
+
+  section.classList.add("comments", "hide");
+
+  const comments = await getPostComments(postId);
+
+  const fragment = createComments(comments);
+
+  section.append(fragment);
+
+  return section;
+}
+
+
+
+
+
+//Function 15
+const createPosts = async(posts)=> {
+  if(!posts)
+  return undefined;
+  const fragment = document.createDocumentFragment();
+  for (const post of posts) {
+      const article = document.createElement('article');
+      const h2 = createElemWithText('h2', post.title);
+      const p1 = createElemWithText('p', post.body);
+      const p2 = createElemWithText('p', `Post ID: ${post.id}`);
+      const author = await getUser(post.userId);
+      const p3 = createElemWithText('p', `Author: ${author.name} with ${author.company.name}`);
+      const p4 = createElemWithText('p', author.company.catchPhrase);
+      const button = createElemWithText('button', 'Show Comments');
+      button.dataset.postId = post.id;
+      article.append(h2, p1, p2, p3, p4, button);
+      const section = await displayComments(post.id);
+      article.append(section);
+      fragment.append(article);
+  }
+  return fragment;
+}
+//completed
+
+
+
+
+//function 16
+const displayPosts = async (posts) => {
+  let myMain = document.querySelector("main");
+  let element = (posts) ? await createPosts(posts) : document.querySelector("main p");
+  myMain.append(element);
+  return element;
+}
+//completed
+
+
+
+
+// Function 17
+function toggleComments(event, postId){
+  if (!event || !postId){
+      return undefined;
+  }
+  event.target.listener = true;
+  let section  = toggleCommentSection(postId);
+  let button = toggleCommentButton(postId);
+  return [section, button];
+}
+
+
+
+
+// function 18
+const refreshPosts = async (posts) => {
+  if (!posts){
+      return undefined;
+  }
+  let buttons = removeButtonListeners();
+  let myMain = deleteChildElements(document.querySelector("main"));
+  let fragment = await displayPosts(posts);
+  let button = addButtonListeners();
+  return [buttons, myMain, fragment, button];
+}
+//completed
+
+
+
+// Function 19
+const selectMenuChangeEventHandler = async (e) => {
+  let userId = e?.target?.value || 1;
+  let posts = await getUserPosts(userId);
+  let refreshPostsArray = await refreshPosts(posts);
+  return [userId, posts, refreshPostsArray];
+}
+
+// Function 20
+const initPage = async() => {
+  let users = await getUsers();
+  let select = populateSelectMenu(users);
+  return [users, select];
+}
+
+// Function 21
+function initApp(){
+  initPage();
+  let select = document.getElementById("selectMenu");
+  select.addEventListener("change", selectMenuChangeEventHandler, false);
+}
+
+
+
+
+//Final event listener
+document.addEventListener("DOMContentLoaded", initApp, false);
