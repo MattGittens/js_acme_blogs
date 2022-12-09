@@ -17,7 +17,7 @@ function createSelectOptions(jsonData){
   if(!jsonData){
     return undefined;
   }else{
-    const obj = JSON.parse(jsonData);
+    const obj = jsonData.json();
 
 
 }
@@ -41,7 +41,7 @@ function toggleCommentSection(postId) {
                 commentSection.classList.toggle('hide');
                 // Return Comment Section Element
                 return commentSection;
-                console.log(commentSection)
+                console.log(commentSections)
             }
         }
 
@@ -104,7 +104,7 @@ const addButtonListeners = () => {
       return buttonsList
   }
 
-}
+}//*fix function 3 to solve problem
 
 
 
@@ -180,7 +180,7 @@ function populateSelectMenu(users) {
   // return menu
   return menu;
 
-} // end populateSelectMenu
+} // *fix function 2 to solve problem
 
 
 
@@ -290,7 +290,7 @@ const displayComments =async(postId)=> {
 
   return section;
 }
-
+//*fix function 18 to solve
 
 
 
@@ -344,7 +344,7 @@ function toggleComments(event, postId){
   let button = toggleCommentButton(postId);
   return [section, button];
 }
-
+//*fix function 3 to solve
 
 
 
@@ -365,11 +365,15 @@ const refreshPosts = async (posts) => {
 
 // Function 19
 const selectMenuChangeEventHandler = async (e) => {
+  if(!e)
+  return undefined;
   let userId = e?.target?.value || 1;
   let posts = await getUserPosts(userId);
   let refreshPostsArray = await refreshPosts(posts);
   return [userId, posts, refreshPostsArray];
 }
+
+
 
 // Function 20
 const initPage = async() => {
@@ -377,6 +381,11 @@ const initPage = async() => {
   let select = populateSelectMenu(users);
   return [users, select];
 }
+//completed
+
+
+
+
 
 // Function 21
 function initApp(){
@@ -384,7 +393,7 @@ function initApp(){
   let select = document.getElementById("selectMenu");
   select.addEventListener("change", selectMenuChangeEventHandler, false);
 }
-
+//completed
 
 
 
