@@ -39,6 +39,32 @@ console.log(optionArray)
 
 
 //function 3
+/*
+function toggleCommentSection(postId) {
+    // If Post Id Is Passed, Return Undefined
+    if (!postId) {
+        return undefined;
+    } else {
+        // Else, Get All Comment Sections
+        const commentSections = document.querySelectorAll('data-post-id');
+        // Loop Through Each Comment Section
+        for (let i = 0; i < commentSections.length; i++) {
+            const commentSection = commentSections[i];
+            // If Post Id Attribut Of Comment Section Is Equal To Post Id Passed Arg
+            if (commentSection.getAttribute('[data-post-id]') === postId) {
+                // Toggle Hide Class
+                commentSection.classList.toggle('hide');
+                // Return Comment Section Element
+                return commentSection;
+            }
+        }
+
+        // If We Are Here, No Matching Post Id Is Found
+        // Return NULL
+        return null;
+    }   
+}
+*/
 function toggleCommentSection(postId) {
   if(!postId)
   return undefined;
@@ -107,7 +133,7 @@ const addButtonListeners = () => {
           let myButton = buttonsList[i]
           let postId = myButton.dataset.postId
           myButton.addEventListener('click', function(event){
-              toggleComments(postId), false})
+              toggleComments(postId)})
       }
       return buttonsList
   }
@@ -190,7 +216,7 @@ function populateSelectMenu(users) {
   // return menu
   return menu;
 
-} // *fix function 2 to solve problem
+} //completed
 
 
 
@@ -300,7 +326,7 @@ const displayComments =async(postId)=> {
 
   return section;
 }
-//*fix function 18 to solve
+//*fix function 8 to solve
 
 
 
@@ -354,7 +380,7 @@ function toggleComments(event, postId){
   let button = toggleCommentButton(postId);
   return [section, button];
 }
-//*fix function 3 to solve
+//completed
 
 
 
@@ -382,7 +408,7 @@ const selectMenuChangeEventHandler = async (e) => {
   let refreshPostsArray = await refreshPosts(posts);
   return [userId, posts, refreshPostsArray];
 }
-
+//completed
 
 
 // Function 20
