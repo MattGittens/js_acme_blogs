@@ -39,33 +39,27 @@ console.log(optionArray)
 
 
 //function 3
-
 function toggleCommentSection(postId) {
-    // If Post Id Is Passed, Return Undefined
-    if (!postId) {
-        return undefined;
-    } else {
-        // Else, Get All Comment Sections
-        const commentSections = document.querySelectorAll('data-post-id');
-        // Loop Through Each Comment Section
-        for (let i = 0; i < commentSections.length; i++) {
-            const commentSection = commentSections[i];
-            // If Post Id Attribut Of Comment Section Is Equal To Post Id Passed Arg
-            if (commentSection.getAttribute('[data-post-id]') === postId) {
-                // Toggle Hide Class
-                commentSection.classList.toggle('hide');
-                // Return Comment Section Element
-                return commentSection;
-            }
-        }
-
-        // If We Are Here, No Matching Post Id Is Found
-        // Return NULL
-        return null;
-    }   
+  if(!postId)
+  return undefined;
+  else{
+  let section = document.querySelector(`section[data-post-id="${postId}"]`);
+  // verify if section exist
+  if (section) {
+      // toggle the class `hide` on the section element
+      section.classList.toggle('hide');
+      return section;
+  }
+  else
+  return null;
+  // return the section element
+  
 }
-//unable to test for it because section does not exist
-        
+}
+//completed
+
+
+
 //function 4
 //toggles comment button
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -113,8 +107,7 @@ const addButtonListeners = () => {
           let myButton = buttonsList[i]
           let postId = myButton.dataset.postId
           myButton.addEventListener('click', function(event){
-              toggleComments(postId), false
-          })
+              toggleComments(postId), false})
       }
       return buttonsList
   }
