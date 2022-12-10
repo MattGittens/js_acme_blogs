@@ -30,7 +30,6 @@ function createSelectOptions(jsonData){
     }
 return optionArray;
 }
-console.log(optionArray)
 }
 //completed
 
@@ -133,11 +132,11 @@ const addButtonListeners = () => {
           let myButton = buttonsList[i]
           let postId = myButton.dataset.postId
           myButton.addEventListener('click', function(event){
-              toggleComments(postId)})
+              toggleComments(event,postId)}, false)
       }
       return buttonsList
   }
-
+console.log(postId);
 }//*fix function 3 to solve problem
 
 
@@ -173,29 +172,27 @@ function createComments(comments) {
   let frag = document.createDocumentFragment();
   // d.Loop through the comments
   for (let i = 0; i < comments.length; i++) {
-    const element = comments[i];
     // e. For each comment do the following:
     // f. Create an article element with document.createElement()
     let a = document.createElement('article');
     // g. Create an h3 element with createElemWithText('h3', comment.name)
-    let h3 = createElemWithText("h3", comments.name);
+    let h3 = createElemWithText("h3", comments[i].name);
     // h. Create an paragraph element with createElemWithText('p', comment.body)
-    let p1 = createElemWithText("p", comments.body);
+    let p1 = createElemWithText("p", comments[i].body);
     // i. Create an paragraph element with createElemWithText('p', `From: ${comment.email}`)
-    let p2 = createElemWithText("p", `From: ${comments.email}`);
+    let p2 = createElemWithText("p", `From: ${comments[i].email}`);
     // j. Append the h3 and paragraphs to the article element (see cheatsheet)
     a.appendChild(h3);
     a.appendChild(p1);
     a.appendChild(p2);
     // k. Append the article element to the fragment
     frag.appendChild(a);
-    console.log(a)
   }
   // l. Return the fragment element
   return frag;
   
 }
-
+//completed
 
 //function 9
 function populateSelectMenu(users) {
@@ -326,8 +323,7 @@ const displayComments =async(postId)=> {
 
   return section;
 }
-//*fix function 8 to solve
-
+//completed
 
 
 
