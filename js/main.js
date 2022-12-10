@@ -16,12 +16,27 @@ return htmlElem;
 function createSelectOptions(jsonData){
   if(!jsonData){
     return undefined;
+    
   }else{
-    const obj = jsonData.json();
+    let optionArray = [];
+    const select = document.querySelector('select')
+    for(let i = 0; i<jsonData.length; i++){
+    const opt =document.createElement('option')
+    opt.value = jsonData[i].id;
+    opt.textContent = jsonData[i].name;
+    select.appendChild(opt)
+    optionArray[i] = opt;
+    
+    }
+return optionArray;
+}
+console.log(optionArray)
+}
+//completed
 
 
-}
-}
+
+
 
 //function 3
 
@@ -41,7 +56,6 @@ function toggleCommentSection(postId) {
                 commentSection.classList.toggle('hide');
                 // Return Comment Section Element
                 return commentSection;
-                console.log(commentSections)
             }
         }
 
@@ -50,6 +64,7 @@ function toggleCommentSection(postId) {
         return null;
     }   
 }
+//unable to test for it because section does not exist
         
 //function 4
 //toggles comment button
@@ -142,7 +157,7 @@ function createComments(comments) {
     const element = comments[i];
     // e. For each comment do the following:
     // f. Create an article element with document.createElement()
-    let a = document.createElement("a");
+    let a = document.createElement('article');
     // g. Create an h3 element with createElemWithText('h3', comment.name)
     let h3 = createElemWithText("h3", comments.name);
     // h. Create an paragraph element with createElemWithText('p', comment.body)
@@ -155,9 +170,11 @@ function createComments(comments) {
     a.appendChild(p2);
     // k. Append the article element to the fragment
     frag.appendChild(a);
+    console.log(a)
   }
   // l. Return the fragment element
   return frag;
+  
 }
 
 
