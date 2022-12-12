@@ -38,47 +38,17 @@ return optionArray;
 
 
 //function 3
-/*
-function toggleCommentSection(postId) {
-    // If Post Id Is Passed, Return Undefined
-    if (!postId) {
-        return undefined;
-    } else {
-        // Else, Get All Comment Sections
-        const commentSections = document.querySelectorAll('data-post-id');
-        // Loop Through Each Comment Section
-        for (let i = 0; i < commentSections.length; i++) {
-            const commentSection = commentSections[i];
-            // If Post Id Attribut Of Comment Section Is Equal To Post Id Passed Arg
-            if (commentSection.getAttribute('[data-post-id]') === postId) {
-                // Toggle Hide Class
-                commentSection.classList.toggle('hide');
-                // Return Comment Section Element
-                return commentSection;
-            }
-        }
-
-        // If We Are Here, No Matching Post Id Is Found
-        // Return NULL
-        return null;
-    }   
-}
-*/
 function toggleCommentSection(postId) {
   if(!postId)
   return undefined;
   else{
   let section = document.querySelector(`section[data-post-id="${postId}"]`);
-  // verify if section exist
   if (section) {
-      // toggle the class `hide` on the section element
       section.classList.toggle('hide');
       return section;
   }
   else
   return null;
-  // return the section element
-  
 }
 }
 //completed
@@ -138,7 +108,7 @@ const addButtonListeners = () => {
   }
 console.log(postId);
 }//*fix function 3 to solve problem
-
+//completed
 
 
 //function 7
@@ -163,32 +133,20 @@ const removeButtonListeners = () => {
 
 //function 8
 function createComments(comments) {
-  //The function createComments should return undefined if it does not receive a parameter.
   if (!comments) {
     return undefined;
   }
-  // b. Receives JSON comments data as a parameter
-  // c. Creates a fragment element with document.createDocumentFragment()
   let frag = document.createDocumentFragment();
-  // d.Loop through the comments
   for (let i = 0; i < comments.length; i++) {
-    // e. For each comment do the following:
-    // f. Create an article element with document.createElement()
     let a = document.createElement('article');
-    // g. Create an h3 element with createElemWithText('h3', comment.name)
     let h3 = createElemWithText("h3", comments[i].name);
-    // h. Create an paragraph element with createElemWithText('p', comment.body)
     let p1 = createElemWithText("p", comments[i].body);
-    // i. Create an paragraph element with createElemWithText('p', `From: ${comment.email}`)
     let p2 = createElemWithText("p", `From: ${comments[i].email}`);
-    // j. Append the h3 and paragraphs to the article element (see cheatsheet)
     a.appendChild(h3);
     a.appendChild(p1);
     a.appendChild(p2);
-    // k. Append the article element to the fragment
     frag.appendChild(a);
   }
-  // l. Return the fragment element
   return frag;
   
 }
@@ -197,20 +155,15 @@ function createComments(comments) {
 //function 9
 function populateSelectMenu(users) {
 
-  // if users is empty, return undefined
   if (!users) return;
-  // select the selectMenu id
   let menu = document.querySelector("#selectMenu");
-  // passes the data to createSelectOptions to get an array
   let options = createSelectOptions(users);
 
-  // loop through and append each option to the menu
   for (let i = 0; i < options.length; i++) {
       let option = options[i];
       menu.append(option);
-  } // end for loop
+  }
 
-  // return menu
   return menu;
 
 } //completed
@@ -221,17 +174,14 @@ function populateSelectMenu(users) {
 //function 10
 const getUsers = async() => {
 
-  let retrieve;
-  // fetch users from jsonplaceholder.typicode.com
+  let retrieves;
   try {
-      retrieve = await fetch("https://jsonplaceholder.typicode.com/users");
-  } // end try
+      retrieves = await fetch("https://jsonplaceholder.typicode.com/users");
+  } 
   catch (error) {
       console.log(error);
-  } // end catch
-
-  // return information
-  return await retrieve.json();
+  } 
+  return await retrieves.json();
 
 } 
 //completed
@@ -241,21 +191,18 @@ const getUsers = async() => {
 //function 11
 const getUserPosts = async(userId) => {
 
-  // if userId has nothing
+
   if (!userId) return;
 
-  let retrieve;
-
-  // try to fetch data for userId
+  let retrieves;
   try {
-      retrieve = await fetch(`https://jsonplaceholder.typicode.com/users/${userId}/posts`);
-  } // end try
+      retrieves = await fetch(`https://jsonplaceholder.typicode.com/users/${userId}/posts`);
+  } 
   catch (error) {
       console.log(error);
-  } // end catch
+  } 
 
-  // return information
-  return retrieve.json();
+  return retrieves.json();
 
 } 
 //completed
@@ -265,21 +212,17 @@ const getUserPosts = async(userId) => {
 //function 12
 const getUser = async(userId) => {
 
-  // if userId has nothing
   if (!userId) return;
 
-  let retrieve;
+  let retrieves;
 
-  // try to fetch data for userId
   try {
-      retrieve = await fetch(`https://jsonplaceholder.typicode.com/users/${userId}`);
-  } // end try
+      retrieves = await fetch(`https://jsonplaceholder.typicode.com/users/${userId}`);
+  } 
   catch (error) {
       console.log(error);
-  } // end catch
-
-  // return information
-  return retrieve.json();
+  }
+  return retrieves.json();
 
 } 
 //completed
